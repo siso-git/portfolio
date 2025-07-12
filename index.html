@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>siso_dev - Professional Roblox Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            background-color: #000;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .logo .blue {
+            color: #3b82f6;
+        }
+
+        .nav-links {
+            display: none;
+            gap: 32px;
+        }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+            }
+        }
+
+        .nav-link {
+            color: #d1d5db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: #3b82f6;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1f2937 0%, #1e3a8a 50%, #000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.2;
+        }
+
+        .hero-bg-element {
+            position: absolute;
+            background: #3b82f6;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .hero-bg-element:nth-child(1) {
+            top: 80px;
+            left: 80px;
+            width: 256px;
+            height: 256px;
+        }
+
+        .hero-bg-element:nth-child(2) {
+            bottom: 80px;
+            right: 80px;
+            width: 384px;
+            height: 384px;
+            animation-delay: 1s;
+        }
+
+        .hero-bg-element:nth-child(3) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            max-width: 1024px;
+        }
+
+        .profile-pic {
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-pic-container {
+            position: relative;
+        }
+
+        .profile-pic-border {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3b82f6, #2563eb);
+            padding: 4px;
+            overflow: hidden;   
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            transform: scale(1.3) rotate(15deg);
+            object-position: center top;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 24px;
+            line-height: 1;
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 96px;
+            }
+        }
+
+        .hero-title .blue {
+            color: #3b82f6;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #d1d5db;
+            margin-bottom: 16px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-subtitle {
+                font-size: 24px;
+            }
+        }
+
+        .hero-tagline {
+            font-size: 24px;
+            color: #e5e7eb;
+            margin-bottom: 32px;
+            font-weight: 300;
+            max-width: 768px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.4;
+        }
+
+        @media (min-width: 768px) {
+            .hero-tagline {
+                font-size: 32px;
+            }
+        }
+
+        .hero-tagline .blue {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #3b82f6;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .btn {
+            padding: 16px 32px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            box-shadow: 0 0 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn-outline {
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: #3b82f6;
+            color: #000;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-bg-gray {
+            background: #111827;
+        }
+
+        .section-bg-black {
+            background: #000;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 64px;
+            }
+        }
+
+        .section-title .blue {
+            color: #3b82f6;
+        }
+
+        .section-divider {
+            width: 96px;
+            height: 4px;
+            background: #2563eb;
+            margin: 0 auto 64px;
+        }
+
+        /* About Section */
+        .about-card {
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 40px;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            max-width: 1152px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 1024px) {
+            .about-card {
+                padding: 64px;
+            }
+        }
+
+        .about-card:hover {
+            background: rgba(31, 41, 55, 0.7);
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            color: #d1d5db;
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .about-text p {
+            font-size: 20px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 1024px) {
+            .about-text p {
+                font-size: 24px;
+            }
+        }
+
+        .about-text .blue {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .about-box {
+            background: rgba(55, 65, 81, 0.5);
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 1024px) {
+            .about-box {
+                padding: 40px;
+            }
+        }
+
+        .about-box h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .about-box h3 {
+                font-size: 32px;
+            }
+        }
+
+        .about-box p {
+            color: #d1d5db;
+            font-size: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            .about-box p {
+                font-size: 24px;
+            }
+        }
+
+        .about-list {
+            list-style: none;
+            color: #d1d5db;
+            font-size: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            .about-list {
+                font-size: 24px;
+            }
+        }
+
+        .about-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .about-list li::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #3b82f6;
+            border-radius: 50%;
+            margin-right: 16px;
+        }
+
+        /* Skills Section */
+        .skills-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+        }
+
+        .skills-bg-element {
+            position: absolute;
+            background: #3b82f6;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .skills-bg-element:nth-child(1) {
+            top: 40px;
+            left: 40px;
+            width: 128px;
+            height: 128px;
+        }
+
+        .skills-bg-element:nth-child(2) {
+            bottom: 40px;
+            right: 40px;
+            width: 192px;
+            height: 192px;
+            animation-delay: 1s;
+        }
+
+        .skills-bg-element:nth-child(3) {
+            top: 50%;
+            left: 25%;
+            width: 160px;
+            height: 160px;
+            animation-delay: 0.5s;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .skills-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .skill-card {
+            background: rgba(17, 24, 39, 0.5);
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 24px;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        @media (min-width: 1024px) {
+            .skill-card {
+                padding: 32px;
+            }
+        }
+
+        .skill-card:hover {
+            background: rgba(17, 24, 39, 0.7);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        @media (min-width: 1024px) {
+            .skill-icon {
+                font-size: 60px;
+            }
+        }
+
+        .skill-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 1024px) {
+            .skill-title {
+                font-size: 20px;
+            }
+        }
+
+        .skill-description {
+            color: #9ca3af;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        @media (min-width: 1024px) {
+            .skill-description {
+                font-size: 16px;
+            }
+        }
+
+        .skill-experience {
+            color: #3b82f6;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        @media (min-width: 1024px) {
+            .skill-experience {
+                font-size: 14px;
+            }
+        }
+
+        /* Projects Section */
+        .projects-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+        }
+
+        .projects-bg-element {
+            position: absolute;
+            background: #3b82f6;
+            border-radius: 50%;
+            filter: blur(120px);
+        }
+
+        .projects-bg-element:nth-child(1) {
+            top: 0;
+            right: 0;
+            width: 384px;
+            height: 384px;
+        }
+
+        .projects-bg-element:nth-child(2) {
+            bottom: 0;
+            left: 0;
+            width: 384px;
+            height: 384px;
+        }
+
+        .projects-description {
+            color: #9ca3af;
+            font-size: 18px;
+            max-width: 512px;
+            margin: 0 auto 64px;
+            text-align: center;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            max-width: 1152px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .project-card {
+            background: rgba(31, 41, 55, 0.5);
+            border: 1px solid #374151;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            background: rgba(31, 41, 55, 0.7);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .project-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 288px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 1024px) {
+            .project-image img {
+                height: 320px;
+            }
+        }
+
+        .project-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+        }
+
+        .project-featured {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #2563eb;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .project-content {
+            padding: 32px;
+        }
+
+        @media (min-width: 1024px) {
+            .project-content {
+                padding: 40px;
+            }
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        @media (min-width: 1024px) {
+            .project-title {
+                font-size: 32px;
+            }
+        }
+
+        .project-description {
+            color: #9ca3af;
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 1024px) {
+            .project-description {
+                font-size: 18px;
+            }
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .project-tag {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        @media (min-width: 1024px) {
+            .project-tag {
+                font-size: 16px;
+            }
+        }
+
+        .project-button {
+            background: #2563eb;
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        @media (min-width: 1024px) {
+            .project-button {
+                padding: 20px;
+                font-size: 20px;
+            }
+        }
+
+        .project-button:hover {
+            background: #1d4ed8;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: #111827;
+            border-top: 1px solid #1f2937;
+            padding: 48px 0;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .footer-title .blue {
+            color: #3b82f6;
+        }
+
+        .footer-subtitle {
+            color: #9ca3af;
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .footer-link {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .footer-link:hover {
+            color: #3b82f6;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1f2937;
+            padding-top: 32px;
+        }
+
+        .footer-copyright {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">
+                    <span class="blue">siso</span>_dev
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="hero-bg-element"></div>
+            <div class="hero-bg-element"></div>
+            <div class="hero-bg-element"></div>
+        </div>
+
+        <div class="container">
+            <div class="hero-content">
+                <!-- Profile Picture -->
+                <div class="profile-pic">
+                    <div class="profile-pic-container">
+                        <div class="profile-pic-border">
+                            <img src="Images/Avatar.PNG"
+                                 alt="siso_dev Avatar">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Title -->
+                <h1 class="hero-title">
+                    <span class="blue">siso</span>_dev
+                </h1>
+                
+                <!-- Display Name -->
+                <p class="hero-subtitle">(Simon)</p>
+
+                <!-- Tagline -->
+                <p class="hero-tagline">
+                    Your Go‑To <span class="blue">Roblox Scripter</span>—Professional Code, Flexible to Your Vision
+                </p>
+
+                <!-- Stats -->
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years on Platform</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">Years Development</div>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#about" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section section-bg-gray">
+        <div class="container">
+            <h2 class="section-title">
+                About <span class="blue">Me</span>
+            </h2>
+            <div class="section-divider"></div>
+
+            <div class="about-card">
+                <div class="about-text">
+                    <p>
+                        I'm <span class="blue">Simon (siso_dev)</span>, a dedicated Roblox developer with 
+                        <span class="blue">5+ years</span> on the platform and over 
+                        <span class="blue">4 years</span> of hands‑on scripting and development experience.
+                    </p>
+
+                    <p>
+                        I script in <span class="blue">Lua/Luau</span> with an emphasis on clean, efficient, 
+                        and scalable solutions. While my core focus is coding, I also bring practical building experience 
+                        (commissioned obby stages), animation work, and UI scripting (tweening, interactive menus), 
+                        as well as deep knowledge of Roblox mechanics and glitch discovery.
+                    </p>
+
+                    <div class="about-box">
+                        <h3>Development Style & Collaboration</h3>
+                        <p>
+                            I deliver personalized, efficient scripting solutions and typically work solo, 
+                            though I'm always open to team collaborations. I prioritize clear communication 
+                            and am flexible to adjust my work to fit your vision.
+                        </p>
+                    </div>
+
+                    <div class="about-box">
+                        <h3>Availability & Goals</h3>
+                        <ul class="about-list">
+                            <li>Open for commissions and semi‑long projects</li>
+                            <li>Building stages and custom systems specialty</li>
+                            <li>Interested in both solo and team‑based work</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section section-bg-black">
+        <div class="skills-bg">
+            <div class="skills-bg-element"></div>
+            <div class="skills-bg-element"></div>
+            <div class="skills-bg-element"></div>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">
+                Skills & <span class="blue">Expertise</span>
+            </h2>
+            <div class="section-divider"></div>
+
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3 class="skill-title">Scripting (Lua/Luau)</h3>
+                    <p class="skill-description">
+                        Core expertise in Roblox scripting with clean, efficient, and scalable solutions. 
+                        Experienced in complex game mechanics, client-server communication, and advanced scripting patterns.
+                    </p>
+                    <div class="skill-experience">4+ years of professional development</div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🏗️</div>
+                    <h3 class="skill-title">Building & Level Design</h3>
+                    <p class="skill-description">
+                        Commissioned obby stages and level design with professional quality. 
+                        Skilled in creating challenging, engaging obstacles and memorable gameplay experiences.
+                    </p>
+                    <div class="skill-experience">Multiple commissioned projects</div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3 class="skill-title">UI Animation & Tweening</h3>
+                    <p class="skill-description">
+                        Interactive menus and smooth UI animations for engaging user experiences. 
+                        Expertise in creating polished, professional interfaces with fluid transitions.
+                    </p>
+                    <div class="skill-experience">Advanced UI scripting skills</div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">🤸</div>
+                    <h3 class="skill-title">Custom Animation Systems</h3>
+                    <p class="skill-description">
+                        Custom animation systems and character movement mechanics. 
+                        Specialized in leap systems, advanced physics, and character controller development.
+                    </p>
+                    <div class="skill-experience">Innovative movement solutions</div>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">⚙️</div>
+                    <h3 class="skill-title">Platform Mechanics Expert</h3>
+                    <p class="skill-description">
+                        Deep knowledge of Roblox platform mechanics and glitch discovery. 
+                        Understanding of engine limitations and creative workarounds for complex implementations.
+                    </p>
+                    <div class="skill-experience">5+ years platform knowledge</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section section-bg-gray">
+        <div class="projects-bg">
+            <div class="projects-bg-element"></div>
+            <div class="projects-bg-element"></div>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">
+                Featured <span class="blue">Projects</span>
+            </h2>
+            <div class="section-divider"></div>
+            <p class="projects-description">
+                Experience & Featured Projects showcasing my scripting and development capabilities
+            </p>
+
+            <div class="projects-grid">
+                <!-- Project 1: Maze Generator -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxwcm9ncmFtbWluZ3xlbnwwfHx8Ymx1ZXwxNzUyMzMwNTg0fDA&ixlib=rb-4.1.0&q=85"
+                             alt="Maze Generator">
+                        <div class="project-featured">Featured</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Maze Generator</h3>
+                        <p class="project-description">
+                            Self-published; generates massive, solvable mazes with dynamic client-server communication. 
+                            My proudest project to date: a real test of my scripting and network-sync skills.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Lua/Luau</span>
+                            <span class="project-tag">Network Sync</span>
+                            <span class="project-tag">Algorithm</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/136957214566501/Maze-Generator" class="project-button">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 2: Code Snippets Plugin -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxwcm9ncmFtbWluZ3xlbnwwfHx8Ymx1ZXwxNzUyMzMwNTg0fDA&ixlib=rb-4.1.0&q=85"
+                             alt="Code Snippets Plugin">
+                        <div class="project-featured">Featured</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Code Snippets Plugin</h3>
+                        <p class="project-description">
+                            Roblox Studio plugin that allows scripters to easily save, edit, and use code snippets with custom prefixes. 
+                            Features a completely navigatable UI for enhanced productivity and workflow optimization.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Plugin Development</span>
+                            <span class="project-tag">UI Design</span>
+                            <span class="project-tag">Workflow Tools</span>
+                        </div>
+                        <a href="#" class="project-button">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 3: Obby Stages Showcase Game -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxwcm9ncmFtbWluZ3xlbnwwfHx8Ymx1ZXwxNzUyMzMwNTg0fDA&ixlib=rb-4.1.0&q=85"
+                             alt="Obby Stages Showcase Game">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Obby Stages Showcase Game</h3>
+                        <p class="project-description">
+                            Commissioned obby stages built for a client; highlights my building and level-design capabilities 
+                            with challenging and engaging obstacles.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Building</span>
+                            <span class="project-tag">Level Design</span>
+                            <span class="project-tag">Commission</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/16751461432/10-stages" class="project-button">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 4: Leap System Game -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1593280359364-5242f1958068?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxnYW1lJTIwZGV2ZWxvcG1lbnR8ZW58MHx8fGJsdWV8MTc1MjMzMDU3NXww&ixlib=rb-4.1.0&q=85"
+                             alt="Leap System Game">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Leap System Game</h3>
+                        <p class="project-description">
+                            Showcases my custom animation and leap-system scripting for a client commission. 
+                            Features smooth character movement and advanced physics.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Animation</span>
+                            <span class="project-tag">Physics</span>
+                            <span class="project-tag">Custom Systems</span>
+                        </div>
+                        <a href="https://www.roblox.com/games/115703107726595/leap-commission" class="project-button">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-title">
+                <span class="blue">siso</span>_dev
+            </div>
+            <p class="footer-subtitle">
+                Professional Roblox Developer | Lua/Luau Specialist
+            </p>
+            
+            <div class="footer-links">
+                <a href="#about" class="footer-link">About</a>
+                <a href="#skills" class="footer-link">Skills</a>
+                <a href="#projects" class="footer-link">Projects</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copyright">
+                    © 2025 siso_dev. All rights reserved. | Built with HTML, CSS & JavaScript
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
