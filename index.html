@@ -683,20 +683,37 @@
             overflow: hidden;
         }
 
-        .project-image img {
+        .project-image-wrapper {
             width: 100%;
             height: 288px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
+            overflow: hidden;
         }
-
+        
         @media (min-width: 1024px) {
-            .project-image img {
+            .project-image-wrapper {
                 height: 320px;
             }
         }
 
-        .project-image:hover img {
+        .project-image-slider {
+            display: flex;
+            height: 100%;
+            transition: transform 0.4s ease-in-out;
+        }
+        
+        .project-image-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .project-image-slider img.no-crop {
+            object-fit: contain;
+            background-color: #1f2937; 
+        }
+        
+        .project-image:hover .project-image-slider {
             transform: scale(1.1);
         }
 
@@ -705,6 +722,44 @@
             position: absolute;
             inset: 0;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+            pointer-events: none; /* Make sure it doesn't block arrows */
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.2s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .slider-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .slider-arrow.prev {
+            left: 16px;
+        }
+
+        .slider-arrow.next {
+            right: 16px;
+        }
+
+        .slider-arrow.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
         }
 
         .project-featured {
@@ -963,7 +1018,7 @@
             <div class="about-card fade-in-element">
                 <div class="about-text">
                     <p>I'm <span class="blue">Simon (siso_dev)</span>, a dedicated Roblox developer with <span class="blue">5+ years</span> on the platform and over <span class="blue">4 years</span> of hands‑on scripting and development experience.</p>
-                    <p>I script in <span class="blue">Lua/Luau</span> with an emphasis on clean, efficient, and scalable solutions. While my core focus is coding, I also bring practical building experience (commissioned obby stages), animation work, and UI scripting (tweening, interactive menus), as well as deep knowledge of Roblox mechanics and glitch discovery.</p>
+                    <p>I script in <span class="blue">Lua/Luau</span> with an emphasis on clean, efficient, and performance friendly solutions. While my core focus is coding, I also bring practical building experience (commissioned obby stages), animation work, and UI scripting (tweening, interactive menus), as well as deep knowledge of Roblox mechanics and glitch discovery.</p>
                     <div class="about-box">
                         <h3>Development Style & Collaboration</h3>
                         <p>I deliver personalized, efficient scripting solutions and typically work solo, though I'm always open to team collaborations. I prioritize clear communication and am flexible to adjust my work to fit your vision.</p>
@@ -1037,7 +1092,16 @@
             <div class="projects-grid">
                 <div class="project-card fade-in-element">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1607799279861-4dd421887fb3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwxfHxwcm9ncmFtbWluZ3xlbnwwfHx8Ymx1ZXwxNzUyMzMwNTg0fDA&ixlib=rb-4.1.0&q=85" alt="Maze Generator">
+                        <div class="project-image-wrapper">
+                            <div class="project-image-slider">
+                                <img src="Images/Maze1.PNG" alt="Maze Generator Project Image 1">
+                                <img src="Images/Maze2.PNG" alt="Maze Generator Project Image 2">
+                                <img src="Images/Maze3.PNG" class="no-crop" alt="Maze Generator Project Image 3">
+                                <img src="Images/Maze4.PNG" class="no-crop" alt="Maze Generator Project Image 4">
+                            </div>
+                        </div>
+                        <button class="slider-arrow prev"><</button>
+                        <button class="slider-arrow next">></button>
                         <div class="project-featured">Featured</div>
                     </div>
                     <div class="project-content">
@@ -1049,7 +1113,15 @@
                 </div>
                 <div class="project-card fade-in-element">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxwcm9ncmFtbWluZ3xlbnwwfHx8Ymx1ZXwxNzUyMzMwNTg0fDA&ixlib=rb-4.1.0&q=85" alt="Code Snippets Plugin">
+                        <div class="project-image-wrapper">
+                            <div class="project-image-slider">
+                                <img src="Images/Plugin1.PNG" class="no-crop" alt="Code Snippets Plugin Image 1">
+                                <img src="Images/Plugin2.PNG" alt="Code Snippets Plugin Image 2">
+                                <img src="Images/Plugin3.PNG" alt="Code Snippets Plugin Image 3">
+                            </div>
+                        </div>
+                        <button class="slider-arrow prev"><</button>
+                        <button class="slider-arrow next">></button>
                         <div class="project-featured">Featured</div>
                     </div>
                     <div class="project-content">
@@ -1061,7 +1133,15 @@
                 </div>
                 <div class="project-card fade-in-element">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzh8MHwxfHNlYXJjaHwyfHxwcm9ncmFtbWluZ3xlbnwwfHx8Ymx1ZXwxNzUyMzMwNTg0fDA&ixlib=rb-4.1.0&q=85" alt="Obby Stages Showcase Game">
+                        <div class="project-image-wrapper">
+                            <div class="project-image-slider">
+                                <img src="Images/Stages1.PNG" alt="Obby Stages Image 1">
+                                <img src="Images/Stages2.PNG" alt="Obby Stages Image 2">
+                                <img src="Images/Stages3.PNG" alt="Obby Stages Image 3">
+                            </div>
+                        </div>
+                        <button class="slider-arrow prev"><</button>
+                        <button class="slider-arrow next">></button>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Obby Stages Showcase Game</h3>
@@ -1072,7 +1152,17 @@
                 </div>
                 <div class="project-card fade-in-element">
                     <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1593280359364-5242f1958068?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwyfHxnYW1lJTIwZGV2ZWxvcG1lbnR8ZW58MHx8fGJsdWV8MTc1MjMzMDU3NXww&ixlib=rb-4.1.0&q=85" alt="Leap System Game">
+                        <div class="project-image-wrapper">
+                            <div class="project-image-slider">
+                                <img src="Images/Leap1.PNG" alt="Leap System Game Image 1">
+                                <img src="Images/Leap2.PNG" alt="Leap System Game Image 2">
+                                <img src="Images/Leap3.PNG" class="no-crop" alt="Leap System Game Image 3">
+                                <img src="" alt="Leap System Game Image 2">
+                                <img src="" alt="Leap System Game Image 3">
+                            </div>
+                        </div>
+                        <button class="slider-arrow prev"><</button>
+                        <button class="slider-arrow next">></button>
                     </div>
                     <div class="project-content">
                         <h3 class="project-title">Leap System Game</h3>
@@ -1095,7 +1185,7 @@
                 <a href="#projects" class="footer-link">Projects</a>
             </div>
             <div class="footer-bottom">
-                <p class="footer-copyright">© 2025 siso_dev. All rights reserved. | Built with HTML, CSS & JavaScript</p>
+                <p class="footer-copyright">2025 siso_dev. | Built with HTML, CSS & JavaScript</p>
             </div>
         </div>
     </footer>
@@ -1125,8 +1215,8 @@
             });
         });
 
-        // Fade-in on Scroll Effect for sections
         document.addEventListener('DOMContentLoaded', () => {
+            // Fade-in on Scroll Effect for sections
             const fadeInElements = document.querySelectorAll('.fade-in-element');
             const observerOptions = {
                 root: null, 
@@ -1144,6 +1234,51 @@
             fadeInElements.forEach(el => {
                 observer.observe(el);
             });
+
+            // Initialize Project Sliders
+            const initProjectSliders = () => {
+                const projectCards = document.querySelectorAll('.project-card');
+
+                projectCards.forEach(card => {
+                    const slider = card.querySelector('.project-image-slider');
+                    const images = card.querySelectorAll('.project-image-slider img');
+                    const prevArrow = card.querySelector('.slider-arrow.prev');
+                    const nextArrow = card.querySelector('.slider-arrow.next');
+
+                    if (!slider || !prevArrow || !nextArrow || images.length <= 1) {
+                        if (prevArrow) prevArrow.classList.add('hidden');
+                        if (nextArrow) nextArrow.classList.add('hidden');
+                        return;
+                    }
+
+                    let currentIndex = 0;
+                    const totalImages = images.length;
+
+                    function updateSlider() {
+                        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                        prevArrow.classList.toggle('hidden', currentIndex === 0);
+                        nextArrow.classList.toggle('hidden', currentIndex >= totalImages - 1);
+                    }
+
+                    nextArrow.addEventListener('click', () => {
+                        if (currentIndex < totalImages - 1) {
+                            currentIndex++;
+                            updateSlider();
+                        }
+                    });
+
+                    prevArrow.addEventListener('click', () => {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            updateSlider();
+                        }
+                    });
+                    
+                    updateSlider(); // Set initial state
+                });
+            };
+
+            initProjectSliders();
         });
     </script>
 </body>
